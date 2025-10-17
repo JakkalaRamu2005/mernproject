@@ -1,26 +1,13 @@
 /* Product Details Container */
 .details-container {
   min-height: calc(100vh - 80px);
-  padding: 3rem 2rem;
-  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  padding: 2rem;
+  background-color: #f8f9fa;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  max-width: 1400px;
+  gap: 2rem;
+  max-width: 1200px;
   margin: 0 auto;
-  animation: fadeIn 0.6s ease-in;
-}
-
-/* Fade In Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Image Container */
@@ -29,33 +16,16 @@
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  border-radius: 16px;
-  padding: 3rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  animation: slideInLeft 0.8s ease-out;
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid #e9ecef;
 }
 
 /* Product Image */
 .details-image {
   max-width: 100%;
-  max-height: 500px;
+  max-height: 400px;
   object-fit: contain;
-  transition: transform 0.4s ease;
-}
-
-.details-image:hover {
-  transform: scale(1.05);
 }
 
 /* Content Section */
@@ -63,31 +33,15 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  animation: slideInRight 0.8s ease-out;
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 /* Product Title */
 .details-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #2d3748;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
   line-height: 1.3;
   margin: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 /* Category */
@@ -130,26 +84,19 @@
 .details-back-button {
   display: inline-block;
   padding: 0.8rem 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: #667eea;
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
   text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
   width: fit-content;
   margin-top: 1rem;
 }
 
 .details-back-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-}
-
-.details-back-button:active {
-  transform: translateY(0);
+  background-color: #5a67d8;
 }
 
 /* Tablet Responsiveness */

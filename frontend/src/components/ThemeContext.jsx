@@ -1,29 +1,19 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext } from 'react';
 
 // Create Theme Context
 const ThemeContext = createContext();
 
 // Theme Provider Component
 export const ThemeProvider = ({ children }) => {
-  // Get initial theme from localStorage or default to 'light'
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'light';
-  });
+  const [theme, setTheme] = useState('light');
 
-  // Toggle between light and dark themes
   const toggleTheme = () => {
-    setTheme(prev => {
-      const newTheme = prev === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', newTheme);
-      return newTheme;
-    });
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
   };
-
-  // Apply theme to document root for CSS variables
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

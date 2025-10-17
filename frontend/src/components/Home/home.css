@@ -1,116 +1,55 @@
 /* Home Container */
 .home-container {
   min-height: calc(100vh - 80px);
-  padding: 3rem 2rem;
-  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  padding: 2rem;
+  background-color: #f8f9fa;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: fadeIn 0.8s ease-in;
-}
-
-/* Fade In Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Main Heading */
 .home-heading {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #2d3748;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
   text-align: center;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: slideDown 0.6s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Paragraph Text */
 .home-paragraph {
-  font-size: 1.25rem;
-  color: #4a5568;
+  font-size: 1.2rem;
+  color: #666;
   text-align: center;
-  max-width: 700px;
-  line-height: 1.8;
-  margin-bottom: 3rem;
-  animation: slideUp 0.8s ease-out 0.2s backwards;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
 }
 
 /* Image Container */
 .home-image-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1200px;
+  gap: 1.5rem;
+  max-width: 1000px;
   width: 100%;
-  animation: scaleIn 0.8s ease-out 0.4s backwards;
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 /* Individual Images */
 .home-image {
   width: 100%;
-  height: 300px;
+  height: 250px;
   object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s ease;
-  cursor: pointer;
-}
-
-/* Image Hover Effect */
-.home-image:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+  border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
 /* Tablet Responsiveness */
 @media (max-width: 1024px) {
   .home-heading {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .home-paragraph {
