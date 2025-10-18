@@ -10,14 +10,13 @@ import About from "./components/About/About"
 import Cart from "./components/Cart/Cart"
 import Products from "./components/Products/Products";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import { CartProvider } from "./components/CartContext";
-import { ThemeProvider } from "./components/ThemeContext";
+
 
 function App() {
   return (
-    <ThemeProvider>
+   
       <AuthProvider>
-        <CartProvider>
+       
           <BrowserRouter>
             <Navbar />
             <Routes>
@@ -31,9 +30,8 @@ function App() {
               <Route path="*" element={<NotFound />}></Route>
             </Routes>
           </BrowserRouter>
-        </CartProvider>
       </AuthProvider>
-    </ThemeProvider>
+   
 
   );
 }

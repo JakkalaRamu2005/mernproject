@@ -6,8 +6,8 @@ dotenv.config();
 const db = mysql.createPool({
     host: 'localhost',
     user: 'root',           // 👈 your MySQL username
-    password: process.env.DB_PASS, // 👈 your MySQL password (check it)
-    database: process.env.DB_NAME,
+    password: "MYSQL@2024!Ramu#", // 👈 your MySQL password (check it)
+    database: "newdb",
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0

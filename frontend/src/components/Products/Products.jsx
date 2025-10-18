@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from "react";
 import "./products.css";
 import { useNavigate } from "react-router";
-import { useCart } from "../CartContext";
+// import { useCart } from "../CartContext";
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   
   const navigate = useNavigate();
-  const { addToCart } = useCart();
+  
 
   // Fetch products from API
   useEffect(() => {
@@ -30,9 +30,7 @@ function Products() {
     navigate(`/products/${id}`);
   };
 
-  const handleAddToCart = (product) => {
-    addToCart(product);
-  };
+ 
 
   if (loading) {
     return (
@@ -58,10 +56,6 @@ function Products() {
             <p className="product-price">₹{(product.price * 83).toFixed(2)}</p>
             <button 
               className="product-button" 
-              onClick={(e) => {
-                e.stopPropagation();
-                handleAddToCart(product);
-              }}
             >
               Add to Cart
             </button>
