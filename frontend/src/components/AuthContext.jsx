@@ -18,11 +18,13 @@ const AuthProvider =({children})=>{
         .then(res=>{
             if(res.ok){
                 setIsLoggedIn(true);
-                setLoading(false);
+                
+            }else{
+                setIsLoggedIn(false);
             }
         })
         .catch(()=>{
-            
+            setIsLoggedIn(false);
         })
         .finally(()=>{
             setLoading(false);
@@ -30,7 +32,7 @@ const AuthProvider =({children})=>{
     },[]);  
 
     return (
-        <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn}}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn, loading}}>{children}</AuthContext.Provider>
     )
 
 }

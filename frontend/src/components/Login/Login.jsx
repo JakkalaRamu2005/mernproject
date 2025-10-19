@@ -1,31 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import "./login.css";
 // import axios from "axios";
-import { useNavigate,Link } from "react-router";
+import { useNavigate, Link, Navigate } from "react-router";
 
 function Login() {
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, isLoggedIn } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
+  if (isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setMsg("");
-    const res = await fetch("http://localhost:5000/auth/login", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-      credentials: "include",
-    });
-    const data = await res.json();
-    if (res.ok) {
-      setIsLoggedIn(true);
-      setMsg("Login successful! Welcome back.");
-      navigate("/");
-    } else {
-      setMsg(data.message || "Login failed.");
+    try {
+      const res = await fetch("http://localhost:5000/auth/login", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setIsLoggedIn(true);
+        setMsg("Login successful! Welcome back.");
+        navigate("/");
+      } else {
+        setMsg(data.message || "Login failed.");
+      }
+
+    }
+    catch (error) {
+      setMsg("An error occurred. Please try again.")
     }
   }
   return (
@@ -39,7 +49,9 @@ function Login() {
             placeholder="Email"
             id="email"
             name="email"
+            value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
           />
         </div>
 
@@ -47,10 +59,11 @@ function Login() {
           <label htmlFor="password">Password</label>
           <input
             id="password"
-
+            value={form.password}
             placeholder="Password"
             type="password"
             onChange={(e) => setForm({ ...form, password: e.target.value })}
+            required
           />
         </div>
 

@@ -1,16 +1,23 @@
 import { useState } from "react";
 import "./register.css";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link,Navigate } from "react-router";
+import { useAuth } from "../AuthContext";
 // import axios from "axios";
 function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
+  const {isLoggedIn} = useAuth();
+
+  if(isLoggedIn){
+    return <Navigate to="/" replace/>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMsg("");
-    const res = await fetch("http://localhost:5000/auth/register", {
+   try{
+     const res = await fetch("http://localhost:5000/auth/register", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -27,6 +34,9 @@ function Register() {
     } else {
       setMsg(data.message || "Registration failed.");
     }
+   }catch(error){
+      setMsg("An error occurred. Please try again.")
+    }
   };
 
   return (
@@ -39,14 +49,17 @@ function Register() {
             value={form.name}
             placeholder="Name"
             onChange={(e) => setForm({ ...form, name: e.target.value })}
+            required
           />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
             value={form.email}
+            type="email"
             placeholder="Email"
             onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
           />
         </div>
 
@@ -57,6 +70,7 @@ function Register() {
             placeholder="Password"
             type="password"
             onChange={(e) => setForm({ ...form, password: e.target.value })}
+            required
           />
         </div>
 

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import {FaShoppingCart, FaMoon, FaSun} from 'react-icons/fa'
 import { useAuth } from "../AuthContext";
+import {useCart} from "../CartContext";
 
 import "./navbar.css";
 
@@ -8,6 +9,7 @@ function Navbar() {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
  
   const navigate = useNavigate();
+  const {getCartCount} = useCart();
 
   if (!isLoggedIn) return null;
 
@@ -20,6 +22,8 @@ function Navbar() {
     navigate("/login");
   };
 
+  const cartCount = getCartCount();
+
   return (
     <nav>
       <div className="nav-links">
@@ -28,6 +32,7 @@ function Navbar() {
         <Link to="/products">Products</Link>
         <Link to="/cart" className="cart-icon">
           <FaShoppingCart size={24} />
+          {cartCount >0 && <span className="cart-count">{cartCount}</span>}
         </Link>
       </div>
       <button onClick={handleLogout}>Logout</button>
