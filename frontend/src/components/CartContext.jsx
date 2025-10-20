@@ -8,7 +8,6 @@ export const CartProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useAuth();
 
-  // Fetch cart from backend when user is logged in
   useEffect(() => {
     if (isLoggedIn) {
       fetchCart();
@@ -17,7 +16,7 @@ export const CartProvider = ({ children }) => {
     }
   }, [isLoggedIn]);
 
-  // Fetch cart from backend
+
   const fetchCart = async () => {
     try {
       setLoading(true);
@@ -28,7 +27,6 @@ export const CartProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        // Transform backend data to match frontend format
         const transformedItems = data.cartItems.map(item => ({
           id: item.product_id,
           title: item.title,
@@ -44,16 +42,18 @@ export const CartProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
-  // Add item to cart
+
   const addToCart = async (product) => {
     if (!isLoggedIn) {
-      alert("Please login to add items to cart");
+      alert("Please Login to add items to cart");
       return;
     }
 
+
     try {
+
       const response = await fetch("http://localhost:5000/cart/add", {
         method: "POST",
         headers: {
@@ -71,18 +71,20 @@ export const CartProvider = ({ children }) => {
       });
 
       if (response.ok) {
-        // Refresh cart from backend
         await fetchCart();
       } else {
         const data = await response.json();
-        console.error("Error adding to cart:", data.message);
+        console.error("Error adding to cart", data.message);
       }
-    } catch (error) {
-      console.error("Error adding to cart:", error);
-    }
-  };
 
-  // Remove item from cart
+    } catch (error) {
+      console.error("Error adding to cart", error);
+    }
+
+
+
+  }
+
   const removeFromCart = async (productId) => {
     if (!isLoggedIn) return;
 
@@ -98,72 +100,78 @@ export const CartProvider = ({ children }) => {
         const data = await response.json();
         console.error("Error removing from cart:", data.message);
       }
-    } catch (error) {
-      console.error("Error removing from cart:", error);
+
+    }catch(error){
+      console.error("Error removing from cart", error);
     }
-  };
 
-  // Update quantity
-  const updateQuantity = async (productId, newQuantity) => {
-    if (!isLoggedIn) return;
+   
+  }
 
-    try {
-      const response = await fetch("http://localhost:5000/cart/update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          product_id: productId,
-          quantity: newQuantity
-        }),
-      });
+  const updateQuantity = async (productId, newQuantity)=>{
+    if(!isLoggedIn) return;
 
-      if (response.ok) {
-        await fetchCart();
-      } else {
-        const data = await response.json();
-        console.error("Error updating cart:", data.message);
-      }
-    } catch (error) {
+
+    try{
+      
+    const response = await fetch("http://localhost:5000/cart/update",{
+      method: "PUT", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        product_id: productId,
+        quantity: newQuantity
+      }),
+    });
+
+    if(response.ok){
+      await fetchCart();
+    }else{
+      const data = await response.json();
+      console.error("Error updating cart:", data.message);
+    }
+
+    }catch(error){
       console.error("Error updating cart:", error);
     }
-  };
 
-  // Clear all items from cart
-  const clearCart = async () => {
-    if (!isLoggedIn) return;
+  }
 
-    try {
-      const response = await fetch("http://localhost:5000/cart/clear", {
-        method: "DELETE",
-        credentials: "include",
-      });
 
-      if (response.ok) {
-        setCartItems([]);
-      } else {
-        const data = await response.json();
-        console.error("Error clearing cart:", data.message);
-      }
-    } catch (error) {
+  const clearCart = async ()=>{
+    if(!isLoggedIn) return;
+
+    try{
+      const response = await fetch("http://localhost:5000/cart/clear",{
+      method: "DELETE",
+      credentials:"include",
+    });
+
+    if(response.ok){
+      setCartItems([]);
+    }else{
+      const data = await response.json();
+      console.error("Error clearing cart:", data.message);
+    }
+
+    }catch(error){
       console.error("Error clearing cart:", error);
     }
+
+    
+  }
+
+  const getCartCount =()=>{
+    return cartItems.reduce((total, item)=>total+item.quantity,0);
   };
 
-  // Get cart count
-  const getCartCount = () => {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  const getCartTotal = ()=>{
+    return cartItems.reduce((total,item)=> total + item.price*83*item.quantity,0);
   };
 
-  // Get cart total
-  const getCartTotal = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * 83 * item.quantity,
-      0
-    );
-  };
 
   return (
     <CartContext.Provider
