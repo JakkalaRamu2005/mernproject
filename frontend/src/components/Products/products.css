@@ -208,3 +208,155 @@ width: 100%;
 max-width: 200px;
 }
 }
+
+/* pagination-css */
+/* Pagination Container */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0 1rem;
+  flex-wrap: wrap;
+}
+
+/* Page Numbers Container */
+.page-numbers {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Pagination Buttons */
+.pagination-btn {
+  padding: 0.6rem 1.5rem;
+  background-color: #667eea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #5a67d8;
+}
+
+.pagination-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Page Number Buttons */
+.page-btn {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.page-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.page-btn.active {
+  background-color: #667eea;
+  color: white;
+}
+
+/* Page Info */
+.page-info {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+/* search-stylings */
+
+/* Search Container */
+.search-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Search Input */
+.search-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 5px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #667eea;
+}
+
+/* Clear Search Button */
+.clear-search-btn {
+  padding: 0.8rem 1.5rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.clear-search-btn:hover {
+  background-color: #c82333;
+}
+
+/* Search Results Info */
+.search-results-info {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #667eea;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+/* No Products Message */
+.no-products {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.no-products p {
+  margin-bottom: 1rem;
+}
+
+/* Mobile Responsiveness for Search */
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .clear-search-btn {
+    width: 100%;
+  }
+}
