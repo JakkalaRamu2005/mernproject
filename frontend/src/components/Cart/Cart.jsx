@@ -1,8 +1,11 @@
 import { useCart } from "../CartContext";
+import { useState } from "react";
 import "./cart.css";
 
 function Cart() {
-  const { cartItems, removeFromCart, updateQuantity, getCartTotal } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, getCartTotal,clearCart } = useCart();
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   if (cartItems.length === 0) {
     return (
@@ -13,8 +16,58 @@ function Cart() {
     );
   }
 
+  const handleClearCart=()=>{
+    setShowConfirmModal(true);
+
+  }
+
+  const confirmClearCart =()=>{
+    clearCart();
+    setShowConfirmModal(false);
+  }
+
+  const cancelClearCart =()=>{
+    setShowConfirmModal(false);
+  }
+
+  
+
   return (
-    <div className="cart-container">
+    <>
+  <div className="cart-header">
+    <h1>Your Cart</h1>
+    {cartItems.length>0&&(
+      <button className="clear-all-btn" onClick={handleClearCart}>
+        Clear All Items
+      </button>
+    )}
+  </div>
+
+
+  {showConfirmModal && (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h2>Clear Cart?</h2>
+        <p>Are you sure you want to remove all item from your cart?</p>
+        <div className="modal-buttons">
+          <button className="confirm-btn" onClick={confirmClearCart}>
+            Yes, Clear All
+          </button>
+          <button className="cancel-btn" onClick={cancelClearCart}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  )}
+
+
+
+
+
+
+
+
+
+     <div className="cart-container">
       <h1>Your Cart</h1>
       
       <div className="cart-items">
@@ -54,6 +107,12 @@ function Cart() {
         <button className="checkout-btn">Proceed to Checkout</button>
       </div>
     </div>
+    
+    
+    </>
+
+
+   
   );
 }
 

@@ -5,6 +5,12 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
+  // clear all item from cart 
+
+  const clearCart = ()=>{
+    setCartItems([]);
+  }
+
   // Add item to cart
   const addToCart = (product) => {
     setCartItems((prevItems) => {
@@ -67,6 +73,7 @@ export const CartProvider = ({ children }) => {
         updateQuantity,
         getCartCount,
         getCartTotal,
+        clearCart
       }}
     >
       {children}
