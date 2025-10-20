@@ -2,6 +2,7 @@ import { useCart } from "../CartContext";
 import { useState } from "react";
 import "./cart.css";
 
+
 function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal,clearCart } = useCart();
 
@@ -18,7 +19,6 @@ function Cart() {
 
   const handleClearCart=()=>{
     setShowConfirmModal(true);
-
   }
 
   const confirmClearCart =()=>{
@@ -29,8 +29,6 @@ function Cart() {
   const cancelClearCart =()=>{
     setShowConfirmModal(false);
   }
-
-  
 
   return (
     <>
@@ -58,15 +56,6 @@ function Cart() {
       </div>
     </div>
   )}
-
-
-
-
-
-
-
-
-
      <div className="cart-container">
       <h1>Your Cart</h1>
       
@@ -107,12 +96,7 @@ function Cart() {
         <button className="checkout-btn">Proceed to Checkout</button>
       </div>
     </div>
-    
-    
     </>
-
-
-   
   );
 }
 

@@ -31,8 +31,30 @@ const AuthProvider =({children})=>{
         })
     },[]);  
 
+    const login = async (credentials)=>{
+        try{
+            const res = await fetch("http://localhost:5000/auth/login",{
+                method:"POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(credentials),
+                credentials: "include",
+            });
+
+            const data = await res.json();
+
+            if(res.ok){
+                setIsLoggedIn(true);
+                return {success: true, message: data.message};
+            }else{
+                return {success: false, message: data.message};
+            }
+        }catch(error){
+            return {success: false, message: "An error occurred. Please try again"};
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn, loading}}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn, loading, login}}>{children}</AuthContext.Provider>
     )
 
 }

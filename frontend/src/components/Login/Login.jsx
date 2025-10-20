@@ -4,11 +4,13 @@ import "./login.css";
 // import axios from "axios";
 import { useNavigate, Link, Navigate } from "react-router";
 
+
 function Login() {
   const { setIsLoggedIn, isLoggedIn } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
+  const {login} = useAuth();
 
   if (isLoggedIn) {
     return <Navigate to="/" replace />;
@@ -17,26 +19,15 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     setMsg("");
-    try {
-      const res = await fetch("http://localhost:5000/auth/login", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-        credentials: "include",
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setIsLoggedIn(true);
-        setMsg("Login successful! Welcome back.");
-        navigate("/");
-      } else {
-        setMsg(data.message || "Login failed.");
-      }
-
+    
+    const result = await login(form);
+    if(result.success){
+      setMsg("Login successful! Welcome back.");
+      navigate("/");
+    }else{
+      setMsg(result.messsage);
     }
-    catch (error) {
-      setMsg("An error occurred. Please try again.")
-    }
+    
   }
   return (
 
@@ -73,10 +64,7 @@ function Login() {
           Don't have an account? <Link to="/register">Register now</Link>
         </p>
       </form>
-
     </div>
-
-
   );
 
 };
