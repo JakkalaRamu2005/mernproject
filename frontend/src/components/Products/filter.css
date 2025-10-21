@@ -1,0 +1,163 @@
+/* Filter Styles */
+.filters-container {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border: 1px solid #e9ecef;
+}
+
+.filters-container h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.filter-group {
+  margin-bottom: 15px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #555;
+}
+
+.filter-select {
+  width: 100%;
+  max-width: 200px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Price Range Styles */
+.price-range-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.price-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.price-input-group label {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+.price-input {
+  width: 80px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.price-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.price-separator {
+  font-weight: bold;
+  color: #666;
+  margin-top: 15px;
+}
+
+/* Clear Filters Button */
+.clear-filters-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.clear-filters-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Results Info */
+.results-info {
+  margin: 15px 0;
+  padding: 10px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+}
+
+.results-info p {
+  margin: 0;
+  color: #495057;
+}
+
+.active-filters {
+  margin-top: 5px !important;
+  font-size: 14px;
+}
+
+.filter-tag {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* Product Category Display */
+.product-category {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin: 5px 0;
+  text-transform: capitalize;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filters-container {
+    padding: 15px;
+  }
+  
+  .price-range-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter-select {
+    max-width: 100%;
+  }
+  
+  .price-input {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters-container {
+    padding: 10px;
+  }
+  
+  .filter-group {
+    margin-bottom: 10px;
+  }
+}
