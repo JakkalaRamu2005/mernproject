@@ -14,9 +14,6 @@ function verifyToken(request, response, next){
     }catch(error){
         return response.status(401).json({message: "expired or . Invalid token"})
     }
-
-    
-
 }
 
 module.exports = verifyToken;

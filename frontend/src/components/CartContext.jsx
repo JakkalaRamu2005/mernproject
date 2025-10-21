@@ -101,75 +101,75 @@ export const CartProvider = ({ children }) => {
         console.error("Error removing from cart:", data.message);
       }
 
-    }catch(error){
+    } catch (error) {
       console.error("Error removing from cart", error);
     }
 
-   
+
   }
 
-  const updateQuantity = async (productId, newQuantity)=>{
-    if(!isLoggedIn) return;
+  const updateQuantity = async (productId, newQuantity) => {
+    if (!isLoggedIn) return;
 
 
-    try{
-      
-    const response = await fetch("http://localhost:5000/cart/update",{
-      method: "PUT", 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        product_id: productId,
-        quantity: newQuantity
-      }),
-    });
+    try {
 
-    if(response.ok){
-      await fetchCart();
-    }else{
-      const data = await response.json();
-      console.error("Error updating cart:", data.message);
-    }
+      const response = await fetch("http://localhost:5000/cart/update", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          product_id: productId,
+          quantity: newQuantity
+        }),
+      });
 
-    }catch(error){
+      if (response.ok) {
+        await fetchCart();
+      } else {
+        const data = await response.json();
+        console.error("Error updating cart:", data.message);
+      }
+
+    } catch (error) {
       console.error("Error updating cart:", error);
     }
 
   }
 
 
-  const clearCart = async ()=>{
-    if(!isLoggedIn) return;
+  const clearCart = async () => {
+    if (!isLoggedIn) return;
 
-    try{
-      const response = await fetch("http://localhost:5000/cart/clear",{
-      method: "DELETE",
-      credentials:"include",
-    });
+    try {
+      const response = await fetch("http://localhost:5000/cart/clear", {
+        method: "DELETE",
+        credentials: "include",
+      });
 
-    if(response.ok){
-      setCartItems([]);
-    }else{
-      const data = await response.json();
-      console.error("Error clearing cart:", data.message);
-    }
+      if (response.ok) {
+        setCartItems([]);
+      } else {
+        const data = await response.json();
+        console.error("Error clearing cart:", data.message);
+      }
 
-    }catch(error){
+    } catch (error) {
       console.error("Error clearing cart:", error);
     }
 
-    
+
   }
 
-  const getCartCount =()=>{
-    return cartItems.reduce((total, item)=>total+item.quantity,0);
+  const getCartCount = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
   };
 
 
-  const getCartTotal = ()=>{
-    return cartItems.reduce((total,item)=> total + item.price*83*item.quantity,0);
+  const getCartTotal = () => {
+    return cartItems.reduce((total, item) => total + item.price * 83 * item.quantity, 0);
   };
 
 

@@ -13,6 +13,7 @@ import Products from "./components/Products/Products";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 
+
 function App() {
   return (
 
@@ -32,8 +33,6 @@ function App() {
               <Route path="products" element={<Products />}></Route>
               <Route path="/about" element={<About />}></Route>
               <Route path="/products/:id" element={<ProductDetails />} />
-
-
             </Route>
 
 
