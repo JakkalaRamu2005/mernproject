@@ -62,6 +62,8 @@ exports.login = async (request, response) => {
             {expiresIn: process.env.JWT_EXPIRES_IN}
         )
 
+        console.log('Generated JWT for user', user.id, ':', token);
+
         response.cookie('token', token,{
             httpOnly: true,
             secure: false, 
