@@ -1,5 +1,6 @@
 import { useCart } from "../CartContext";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import "./cart.css";
 
 
@@ -7,6 +8,7 @@ function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal,clearCart } = useCart();
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const navigate = useNavigate();
 
   if (cartItems.length === 0) {
     return (
@@ -93,7 +95,7 @@ function Cart() {
       
       <div className="cart-summary">
         <h2>Total: ₹{getCartTotal().toFixed(2)}</h2>
-        <button className="checkout-btn">Proceed to Checkout</button>
+        <button className="checkout-btn" onClick={()=> navigate('/checkout') }>Proceed to Checkout</button>
       </div>
     </div>
     </>

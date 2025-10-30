@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
 const cartRoutes = require('./routes/cart');
 const wishlistRoutes = require("./routes/wishlist");
+const checkoutRoutes = require("./routes/checkout");
 const app = express();
 app.use(cookieParser());
 app.use(
@@ -20,6 +21,7 @@ app.use(cors({
 app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
 app.use('./wishlist', wishlistRoutes);
+app.use("/checkout", checkoutRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

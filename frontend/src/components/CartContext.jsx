@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/cart", {
+      const response = await fetch("http://localhost:1234/cart", {
         method: "GET",
         credentials: "include",
       });
@@ -54,7 +54,7 @@ export const CartProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch("http://localhost:5000/cart/add", {
+      const response = await fetch("http://localhost:1234/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
