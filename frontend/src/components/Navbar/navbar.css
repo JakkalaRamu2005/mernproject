@@ -1,6 +1,6 @@
 /* Navbar Container */
 nav {
-  background-color: #667eea;
+  background-color: var(--primary-color);
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -22,7 +22,7 @@ nav {
 
 /* Individual Links */
 .nav-links a {
-  color: #ffffff;
+  color: var(--text-color-on-primary);
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
@@ -34,28 +34,6 @@ nav {
 /* Hover Effect for Links */
 .nav-links a:hover {
   background-color: rgba(255, 255, 255, 0.2);
-}
-
-button{
-  width: 150px;
-}
-/* Logout Button */
-nav button {
-  background-color: #ffffff;
-  color: #667eea;
-  border: none;
-  padding: 0.6rem 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-/* Logout Button Hover */
-nav button:hover {
-  background-color: #f0f0f0;
 }
 
 /* Mobile Responsiveness */
@@ -76,7 +54,7 @@ nav button:hover {
     padding: 0.4rem 0.8rem;
   }
 
-  nav button {
+  nav .btn {
     width: 100%;
     max-width: 200px;
   }
@@ -111,5 +89,3 @@ nav button:hover {
   border-radius: 50%;
   padding: 2px 6px;
 }
-
-

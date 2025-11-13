@@ -2,14 +2,14 @@
 .products-container {
   min-height: calc(100vh - 80px);
   padding: 2rem;
-  background-color: #f8f9fa;
+  background-color: var(--light-gray);
 }
 
 /* Products Heading */
 .products-heading {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #333;
+  color: var(--dark-gray);
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -25,10 +25,10 @@
 
 /* Product Card */
 .product-card {
-  background: white;
+  background: var(--secondary-color);
   border-radius: 8px;
   padding: 1.5rem;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--medium-gray);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,7 +37,7 @@
 }
 
 .product-card:hover {
-  border-color: #667eea;
+  border-color: var(--primary-color);
 }
 
 /* Product Image */
@@ -52,7 +52,7 @@
 .product-title {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #333;
+  color: var(--dark-gray);
   text-align: center;
   margin: 1rem 0;
   line-height: 1.4;
@@ -64,28 +64,10 @@
 .product-price {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #667eea;
+  color: var(--primary-color);
   margin: 0.5rem 0 1rem;
 }
 
-/* Add to Cart Button */
-.product-button {
-  width: 100%;
-  padding: 0.8rem 1.5rem;
-  background-color: #667eea;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: auto;
-  margin-bottom: 20px;
-}
-
-.product-button:hover {
-  background-color: #5a67d8;
-}
 
 /* Loading State */
 .products-container:empty::after {
@@ -150,10 +132,6 @@
     font-size: 1.3rem;
   }
 
-  .product-button {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
-  }
 }
 
 /* Small Mobile Screens */
@@ -190,9 +168,6 @@
 font-size: 1.25rem;
 }
 
-.product-button {
-padding: 0.75rem;
-}
 
 .pagination-container {
 flex-direction: column;
@@ -203,10 +178,6 @@ gap: 1rem;
 justify-content: center;
 }
 
-.pagination-btn {
-width: 100%;
-max-width: 200px;
-}
 }
 
 /* pagination-css */
@@ -228,35 +199,14 @@ max-width: 200px;
   justify-content: center;
 }
 
-/* Pagination Buttons */
-.pagination-btn {
-  padding: 0.6rem 1.5rem;
-  background-color: #667eea;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.pagination-btn:hover:not(:disabled) {
-  background-color: #5a67d8;
-}
-
-.pagination-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
 
 /* Page Number Buttons */
 .page-btn {
   width: 40px;
   height: 40px;
-  background-color: white;
-  color: #667eea;
-  border: 2px solid #667eea;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
   border-radius: 5px;
   font-size: 1rem;
   font-weight: bold;
@@ -264,12 +214,19 @@ max-width: 200px;
 }
 
 .page-btn:hover {
-  background-color: #f0f0f0;
+  background-color: var(--light-gray);
 }
 
-.page-btn.active {
-  background-color: #667eea;
-  color: white;
+.page-btn-active {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: 2px solid var(--primary-color);
 }
 
 /* Page Info */
@@ -299,35 +256,21 @@ max-width: 200px;
   flex: 1;
   padding: 0.8rem 1rem;
   font-size: 1rem;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--medium-gray);
   border-radius: 5px;
   outline: none;
 }
 
 .search-input:focus {
-  border-color: #667eea;
+  border-color: var(--primary-color);
 }
 
-/* Clear Search Button */
-.clear-search-btn {
-  padding: 0.8rem 1.5rem;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.clear-search-btn:hover {
-  background-color: #c82333;
-}
 
 /* Search Results Info */
 .search-results-info {
   text-align: center;
   font-size: 1.1rem;
-  color: #667eea;
+  color: var(--primary-color);
   font-weight: bold;
   margin-bottom: 1.5rem;
 }
@@ -356,8 +299,4 @@ max-width: 200px;
     width: 100%;
   }
 
-  .clear-search-btn {
-    width: 100%;
-  }
 }
-
