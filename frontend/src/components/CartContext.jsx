@@ -89,7 +89,7 @@ export const CartProvider = ({ children }) => {
     if (!isLoggedIn) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/cart/remove/${productId}`, {
+      const response = await fetch(`http://localhost:1234/cart/remove/${productId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -114,7 +114,7 @@ export const CartProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch("http://localhost:5000/cart/update", {
+      const response = await fetch("http://localhost:1234/cart/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -144,7 +144,7 @@ export const CartProvider = ({ children }) => {
     if (!isLoggedIn) return;
 
     try {
-      const response = await fetch("http://localhost:5000/cart/clear", {
+      const response = await fetch("http://localhost:1234/cart/clear", {
         method: "DELETE",
         credentials: "include",
       });

@@ -14,7 +14,7 @@ function Navbar() {
   if (!isLoggedIn) return null;
 
   const handleLogout = async () => {
-    await fetch("http://localhost:5000/auth/logout", {
+    await fetch("http://localhost:1234/auth/logout", {
       method: "POST",
       credentials: "include",
     });

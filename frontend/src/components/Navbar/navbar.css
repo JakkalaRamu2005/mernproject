@@ -36,11 +36,9 @@ nav {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-button{
-  width: 150px;
-}
-/* Logout Button */
+/* FIXED: Only target buttons inside nav, not all buttons */
 nav button {
+  width: 150px;
   background-color: #ffffff;
   color: #667eea;
   border: none;
@@ -94,7 +92,6 @@ nav button:hover {
   }
 }
 
-
 .cart-icon {
   position: relative;
   color: white;
@@ -111,5 +108,3 @@ nav button:hover {
   border-radius: 50%;
   padding: 2px 6px;
 }
-
-
