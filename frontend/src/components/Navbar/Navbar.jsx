@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router";
-import {FaShoppingCart, FaMoon, FaSun} from 'react-icons/fa'
+import { Link, useNavigate } from "react-router-dom";
+import {FaShoppingCart} from 'react-icons/fa'
 import { useAuth } from "../AuthContext";
 import {useCart} from "../CartContext";
 
@@ -35,7 +35,7 @@ function Navbar() {
           {cartCount >0 && <span className="cart-count">{cartCount}</span>}
         </Link>
       </div>
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout} className="btn btn-secondary">Logout</button>
     </nav>
   );
 }

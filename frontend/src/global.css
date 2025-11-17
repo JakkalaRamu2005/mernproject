@@ -1,0 +1,50 @@
+/* Global Styles */
+
+/* Color Palette */
+:root {
+  --primary-color: #667eea;
+  --primary-color-dark: #5a67d8;
+  --secondary-color: #ffffff;
+  --text-color-on-primary: #ffffff;
+  --text-color-on-secondary: #667eea;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #333;
+}
+
+
+/* Button Styles */
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text-color-on-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-color-on-secondary);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--light-gray);
+}
+
+.btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
