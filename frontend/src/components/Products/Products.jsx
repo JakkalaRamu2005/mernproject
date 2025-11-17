@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./products.css";
-
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
-import Skeleton from "./Skeleton"; // Import Skeleton component
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -28,7 +26,7 @@ function Products() {
         setCategories(uniqueCategories);
         const prices = data.map(product => product.price * 83);
         const minPrice = Math.floor(Math.min(...prices));
-        const maxPrice = Math.floor(Math.max(...prices));
+        const maxPrice = Math.ceil(Math.max(...prices));
         setPriceRange({ min: minPrice, max: maxPrice });
         setLoading(false);
       })
@@ -45,16 +43,17 @@ function Products() {
   const handleAddToCart = (e, product) => {
     e.stopPropagation();
     addToCart(product);
-  }
+  };
 
-  const getFilteredProucts = () => {
+  const getFilteredProducts = () => {
     let filtered = products;
 
     if (searchQuery) {
       const searchLower = searchQuery.toLowerCase();
       filtered = filtered.filter((product) => {
         return (
-          product.title.toLowerCase().includes(searchLower) || product.category.toLowerCase().includes(searchLower)
+          product.title.toLowerCase().includes(searchLower) ||
+          product.category.toLowerCase().includes(searchLower)
         );
       });
     }
@@ -66,10 +65,10 @@ function Products() {
     filtered = filtered.filter(product => {
       const priceINR = product.price * 83;
       return priceINR >= priceRange.min && priceINR <= priceRange.max;
-    })
+    });
 
     return filtered;
-  }
+  };
 
   const clearAllFilters = () => {
     setSearchQuery("");
@@ -82,168 +81,259 @@ function Products() {
       setPriceRange({ min: minPrice, max: maxPrice });
     }
     setCurrentPage(1);
-  }
+  };
 
-  const filteredProducts = getFilteredProucts();
+  const filteredProducts = getFilteredProducts();
   const totalFilteredPages = Math.ceil(filteredProducts.length / productsPerpage);
   const indexOfLastFilteredProduct = currentPage * productsPerpage;
   const indexOfFirstFilteredProduct = indexOfLastFilteredProduct - productsPerpage;
-  const currentFilteredProducts = filteredProducts.slice(indexOfFirstFilteredProduct, indexOfLastFilteredProduct)
+  const currentFilteredProducts = filteredProducts.slice(indexOfFirstFilteredProduct, indexOfLastFilteredProduct);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  };
 
   const nextPage = () => {
     if (currentPage < totalFilteredPages) {
       setCurrentPage(currentPage + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }
+  };
 
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }
+  };
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
     setCurrentPage(1);
-  }
+  };
 
   const handlePriceRangeChange = (e) => {
     const { name, value } = e.target;
     setPriceRange(prev => ({ ...prev, [name]: parseInt(value) }));
     setCurrentPage(1);
-  }
+  };
 
-  const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
     setCurrentPage(1);
-  }
+  };
 
   return (
-    <div className="products-container">
-      <h1 className="products-heading">Products Page</h1>
-      <div className="search-container">
-        <input type="text" placeholder="Search products by name or category..."
-          value={searchQuery}
-          onChange={handleSearch}
-          className="search-input"
-        />
-        {searchQuery && (
-          <button onClick={() => setSearchQuery("")} className="btn btn-secondary">Clear Search</button>
-        )}
-      </div>
-
-      <div className="filters-container">
-        <h1>Filters</h1>
-        <div className="filter-group">
-          <label htmlFor="category-filter">Category:</label>
-          <select id="category-filter"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className="filter-select"
-          ><option value="all">All Categories</option>
-            {categories.map(category => (
-              <option key={category} value={category}>
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="filter-group">
-          <label> Price Range:</label>
-          <div className="price-range-container">
-            <div className="price-input-group">
-              <label htmlFor="min-price">Min:</label>
-              <input type="number" id="min-price" name="min" value={priceRange.min}
-                onChange={handlePriceRangeChange}
-                className="price-input"
-                min="0"
-              />
-            </div>
-            <span className="price-separator">-</span>
-            <div className="price-input-group">
-              <label htmlFor="max-price">Max:</label>
-              <input type="number" id="max-price" name="max" value={priceRange.max} min="0" className="price-input" onChange={handlePriceRangeChange} />
-            </div>
-          </div>
+    <div className="products-page">
+      {/* Page Header */}
+      <div className="products-header">
+        <h1 className="products-heading">All Products</h1>
+        
+        {/* Search Bar */}
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search products by name or category..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="search-input"
+          />
+          {searchQuery && (
+            <button onClick={() => setSearchQuery("")} className="clear-search-btn">
+              ✕
+            </button>
+          )}
         </div>
       </div>
 
-      <button className="btn btn-secondary" onClick={clearAllFilters}>
-        Clear All Filters
-      </button>
-
-      <div className="results-info">
-        <p>Showing {filteredProducts.length} product(s)</p>
-        {(searchQuery || selectedCategory !== "all") && (
-          <p className="active-filters">
-            Active filters:
-            {searchQuery && <span className="filter-tag">Search: "{searchQuery}"</span>}
-            {selectedCategory !== "all" && <span className="filter-tag">Category: {selectedCategory}</span>}
-          </p>
-        )}
-      </div>
-
-      {
-        loading ? (
-          <div className="products-grid">
-            {[...Array(productsPerpage)].map((_, i) => <Skeleton key={i} />)}
-          </div>
-        ) : (
-          <div className="products-grid">
-            {currentFilteredProducts.length > 0 ? (
-              currentFilteredProducts.map((product) => (
-                <div key={product.id} className="product-card" onClick={() => handleCardClick(product.id)}>
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="product-image"
-                  />
-                  <h2 className="product-title">{product.title}</h2>
-                  <p className="product-category">{product.category}</p>
-                  <p className="product-price">₹{(product.price * 83).toFixed(2)}</p>
-                  <button
-                    className="btn btn-primary" onClick={(e) => handleAddToCart(e, product)}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              ))
-            ) : (
-              <div className="no-products">
-                <p>No products found with current filters</p>
-                <button onClick={clearAllFilters} className="btn btn-secondary">Clear ALL filters</button>
-              </div>
+      {/* Main Content: Sidebar + Products */}
+      <div className="products-main-layout">
+        {/* Left Sidebar - Filters */}
+        <aside className="filters-sidebar">
+          <div className="sidebar-header">
+            <h2>Filters</h2>
+            {(searchQuery || selectedCategory !== "all") && (
+              <button onClick={clearAllFilters} className="clear-all-btn">
+                Clear All
+              </button>
             )}
           </div>
-        )
-      }
 
-      {filteredProducts.length > 0 && totalFilteredPages && (
-        <>
-          <div className="pagination-container">
-            <button onClick={prevPage} disabled={currentPage === 1} className="btn btn-primary">Previous</button>
-            <div className="page-numbers">
-              {[...Array(totalFilteredPages)].map((_, index) => (
-                <button key={index + 1} onClick={() => paginate(index + 1)} className={currentPage === index + 1 ? "page-btn-active" : "page-btn"}>{index + 1}</button>
+          {/* Active Filters Display */}
+          {(searchQuery || selectedCategory !== "all") && (
+            <div className="active-filters-section">
+              <h3>Active Filters:</h3>
+              <div className="active-filters-tags">
+                {searchQuery && (
+                  <span className="filter-tag">
+                    Search: "{searchQuery}"
+                    <button onClick={() => setSearchQuery("")}>✕</button>
+                  </span>
+                )}
+                {selectedCategory !== "all" && (
+                  <span className="filter-tag">
+                    {selectedCategory}
+                    <button onClick={() => setSelectedCategory("all")}>✕</button>
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Category Filter */}
+          <div className="filter-section">
+            <h3 className="filter-title">Category</h3>
+            <div className="filter-options">
+              <label className={`filter-option ${selectedCategory === "all" ? "active" : ""}`}>
+                <input
+                  type="radio"
+                  name="category"
+                  checked={selectedCategory === "all"}
+                  onChange={() => handleCategoryChange("all")}
+                />
+                <span>All Categories</span>
+              </label>
+              {categories.map(category => (
+                <label key={category} className={`filter-option ${selectedCategory === category ? "active" : ""}`}>
+                  <input
+                    type="radio"
+                    name="category"
+                    checked={selectedCategory === category}
+                    onChange={() => handleCategoryChange(category)}
+                  />
+                  <span>{category.charAt(0).toUpperCase() + category.slice(1)}</span>
+                </label>
               ))}
             </div>
-            <button onClick={nextPage} disabled={currentPage === totalFilteredPages} className="btn btn-primary">Next</button>
           </div>
 
-          <div className="page-info">
-            Page {currentPage} of {totalFilteredPages}
+          {/* Price Range Filter */}
+          <div className="filter-section">
+            <h3 className="filter-title">Price Range</h3>
+            <div className="price-range-inputs">
+              <div className="price-input-group">
+                <label htmlFor="min-price">Min (₹)</label>
+                <input
+                  type="number"
+                  id="min-price"
+                  name="min"
+                  value={priceRange.min}
+                  onChange={handlePriceRangeChange}
+                  className="price-input"
+                  min="0"
+                />
+              </div>
+              <span className="price-separator">-</span>
+              <div className="price-input-group">
+                <label htmlFor="max-price">Max (₹)</label>
+                <input
+                  type="number"
+                  id="max-price"
+                  name="max"
+                  value={priceRange.max}
+                  onChange={handlePriceRangeChange}
+                  className="price-input"
+                  min="0"
+                />
+              </div>
+            </div>
           </div>
-        </>
-      )}
+        </aside>
 
+        {/* Right Side - Products Grid */}
+        <main className="products-content">
+          {/* Results Info */}
+          <div className="results-info">
+            <p>
+              {loading
+                ? "Loading products..."
+                : `Showing ${currentFilteredProducts.length} of ${filteredProducts.length} products`}
+            </p>
+          </div>
+
+          {/* Products Grid */}
+          {loading ? (
+            <div className="loading-message">
+              <div className="loading-spinner"></div>
+              <p>Loading products...</p>
+            </div>
+          ) : (
+            <>
+              {currentFilteredProducts.length > 0 ? (
+                <div className="products-grid">
+                  {currentFilteredProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      className="product-card"
+                      onClick={() => handleCardClick(product.id)}
+                    >
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        className="product-image"
+                      />
+                      <h2 className="product-title">{product.title}</h2>
+                      <p className="product-category">{product.category}</p>
+                      <p className="product-price">₹{(product.price * 83).toFixed(2)}</p>
+                      <button
+                        className="add-to-cart-btn"
+                        onClick={(e) => handleAddToCart(e, product)}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="no-products">
+                  <p>No products found with current filters</p>
+                  <button onClick={clearAllFilters} className="btn-secondary">
+                    Clear All Filters
+                  </button>
+                </div>
+              )}
+
+              {/* Pagination */}
+              {filteredProducts.length > 0 && totalFilteredPages > 1 && (
+                <>
+                  <div className="pagination-container">
+                    <button
+                      onClick={prevPage}
+                      disabled={currentPage === 1}
+                      className="pagination-btn"
+                    >
+                      Previous
+                    </button>
+                    <div className="page-numbers">
+                      {[...Array(totalFilteredPages)].map((_, index) => (
+                        <button
+                          key={index + 1}
+                          onClick={() => paginate(index + 1)}
+                          className={currentPage === index + 1 ? "page-btn-active" : "page-btn"}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      onClick={nextPage}
+                      disabled={currentPage === totalFilteredPages}
+                      className="pagination-btn"
+                    >
+                      Next
+                    </button>
+                  </div>
+
+                  <div className="page-info">
+                    Page {currentPage} of {totalFilteredPages}
+                  </div>
+                </>
+              )}
+            </>
+          )}
+        </main>
+      </div>
     </div>
   );
 }
