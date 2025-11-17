@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./products.css";
-import "./filter.css";
+
 import { useNavigate } from "react-router";
 import { useCart } from "../CartContext";
 import Skeleton from "./Skeleton"; // Import Skeleton component
