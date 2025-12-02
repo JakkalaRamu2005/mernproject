@@ -14,7 +14,7 @@ app.use(
 )
 
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    origin: 'https://mernproject-76cypxvrl-ramus-projects-a74e5d04.vercel.app/', 
     credentials: true
 }));
 // app.use(bodyParser.json());
