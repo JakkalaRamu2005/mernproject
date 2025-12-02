@@ -17,7 +17,7 @@ function Register() {
     e.preventDefault();
     setMsg("");
    try{
-     const res = await fetch("http://localhost:1234/auth/register", {
+     const res = await fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/auth/register", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

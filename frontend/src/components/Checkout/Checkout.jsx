@@ -79,7 +79,7 @@ function Checkout() {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5000/checkout/create-order", {
+      const response = await fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/checkout/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

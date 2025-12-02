@@ -11,7 +11,7 @@ const AuthProvider =({children})=>{
     const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
-        fetch("http://localhost:1234/auth/profile",{
+        fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/auth/profile",{
             method:"GET",
             credentials: "include",
         })
@@ -33,7 +33,7 @@ const AuthProvider =({children})=>{
 
     const login = async (credentials)=>{
         try{
-            const res = await fetch("http://localhost:1234/auth/login",{
+            const res = await fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/auth/login",{
                 method:"POST",
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(credentials),

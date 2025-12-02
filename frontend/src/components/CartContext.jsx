@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:1234/cart", {
+      const response = await fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/cart", {
         method: "GET",
         credentials: "include",
       });
@@ -54,7 +54,7 @@ export const CartProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch("http://localhost:1234/cart/add", {
+      const response = await fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export const CartProvider = ({ children }) => {
     if (!isLoggedIn) return;
 
     try {
-      const response = await fetch(`http://localhost:1234/cart/remove/${productId}`, {
+      const response = await fetch(`https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/cart/remove/${productId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -114,7 +114,7 @@ export const CartProvider = ({ children }) => {
 
     try {
 
-      const response = await fetch("http://localhost:1234/cart/update", {
+      const response = await fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/cart/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -144,7 +144,7 @@ export const CartProvider = ({ children }) => {
     if (!isLoggedIn) return;
 
     try {
-      const response = await fetch("http://localhost:1234/cart/clear", {
+      const response = await fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/cart/clear", {
         method: "DELETE",
         credentials: "include",
       });

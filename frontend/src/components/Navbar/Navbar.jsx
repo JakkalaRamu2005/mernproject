@@ -14,7 +14,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:1234/auth/logout", {
+      await fetch("https://emmorce-2qehvpxa8-ramus-projects-a74e5d04.vercel.app/auth/logout", {
         method: "POST",
         credentials: "include",
       });
