@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../CartContext";
-import "./Home.css";
+import "./home.css";
 
 function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
