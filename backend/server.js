@@ -23,7 +23,7 @@ app.use('/cart', cartRoutes);
 app.use('./wishlist', wishlistRoutes);
 app.use("/checkout", checkoutRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 1234;
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}/`)
 })
